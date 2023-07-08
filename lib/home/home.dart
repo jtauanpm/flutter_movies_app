@@ -1,9 +1,9 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_movies_app/home/movie_service.dart';
+import 'package:flutter_movies_app/Services/movie_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'movie.dart';
+import '../Widgets/movie_box.dart';
+import '../models/movie.dart';
 
 final moviesFutureProvider =
     FutureProvider.autoDispose<List<Movie>>((ref) async {
@@ -100,7 +100,7 @@ class HomePage extends ConsumerWidget {
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
           childAspectRatio: 0.7,
-          children: movies.map((movie) => _MovieBox(movie: movie)).toList(),
+          children: movies.map((movie) => MovieBox(movie: movie)).toList(),
         );
       },
     );
@@ -140,70 +140,6 @@ class HomePage extends ConsumerWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _MovieBox extends StatelessWidget {
-  final Movie movie;
-
-  const _MovieBox({Key? key, required this.movie}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.network(
-          movie.poster ?? "",
-          fit: BoxFit.cover,
-          width: double.infinity,
-          loadingBuilder: (BuildContext context, Widget child,
-              ImageChunkEvent? loadingProgress) {
-            if (loadingProgress == null) {
-              return child;
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: _FrontBanner(text: movie.title ?? "Could not load this movie"),
-        ),
-      ],
-    );
-  }
-}
-
-class _FrontBanner extends StatelessWidget {
-  const _FrontBanner({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-        child: Container(
-          color: const Color.fromARGB(127, 33, 149, 243),
-          height: 40,
-          child: Center(
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.bodyMedium,
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
       ),
     );
   }
