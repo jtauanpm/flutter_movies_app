@@ -10,10 +10,13 @@ class MovieApp extends StatelessWidget {
     return MaterialApp(
       //debugShowCheckedModeBanner: false,
       title: 'Movie App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 255, 255, 255)),
-        useMaterial3: true,
+      theme: ThemeData( // Defina o tema padrão como light (opcional)
+        // Defina as cores para o tema Dark Mode
+        // Você pode ajustar as cores conforme necessário
+        colorScheme: const ColorScheme.dark(
+          primary: Colors.blue
+        ),
+        // Outras propriedades do tema, como fontes e estilos, podem ser adicionadas aqui
       ),
       home: const HomePage(),
     );
