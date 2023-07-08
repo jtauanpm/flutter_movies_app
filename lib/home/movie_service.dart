@@ -12,11 +12,16 @@ class MovieService {
 
   final EnvironmentConfig _environmentConfig;
   final Dio _dio;
+  var searchString = "Avatar";
 
-  Future<List<Movie>> getMovies(String title) async {
+  void setSearchString(String input) {
+    searchString = input;
+  }
+
+  Future<List<Movie>> getMovies() async {
     final apiKey = _environmentConfig.movieApiKey;
 
-    final uri = "https://omdbapi.com/?apikey=$apiKey&s=$title";
+    final uri = "https://omdbapi.com/?apikey=$apiKey&s=$searchString";
 
     print(uri);
 
