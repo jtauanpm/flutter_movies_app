@@ -15,8 +15,29 @@ class SplashScreen extends StatelessWidget {
     navigateToHome();
 
     return const Scaffold(
-      body: Center(
-        child: Text("Seja bem-vindo !"),
+      body: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue, Colors.lightBlueAccent]
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Seja bem-vindo!",
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          )
+        )
       ),
     );
   }
