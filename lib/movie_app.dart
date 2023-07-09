@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movies_app/Screens/splash.dart';
 
-import 'home/home.dart';
+import 'Screens/movie_list.dart';
 
 class MovieApp extends StatelessWidget {
   const MovieApp({Key? key}) : super(key: key);
@@ -11,11 +12,14 @@ class MovieApp extends StatelessWidget {
       //debugShowCheckedModeBanner: false,
       title: 'Movie App',
       theme: ThemeData(
-        colorScheme: const ColorScheme.dark(
-          primary: Colors.blue
-        ),
+        colorScheme: const ColorScheme.dark(primary: Colors.blue),
       ),
-      home: const HomePage(),
+      home: const SplashScreen(),
+
+      routes: {
+        '/movies': (context) => const MoviesPage(),
+        //'/movie-details': (context) => const
+      },
     );
   }
 }
