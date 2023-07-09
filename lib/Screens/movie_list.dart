@@ -14,8 +14,8 @@ final moviesFutureProvider =
   return movies;
 });
 
-class HomePage extends ConsumerWidget {
-  const HomePage({Key? key}) : super(key: key);
+class MoviesPage extends ConsumerWidget {
+  const MoviesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
