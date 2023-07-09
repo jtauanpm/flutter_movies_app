@@ -23,8 +23,6 @@ class MovieService {
 
     final uri = "https://omdbapi.com/?apikey=$apiKey&s=$searchString";
 
-    print(uri);
-
     final response = await _dio.get(uri);
 
     final results = List<Map<String, dynamic>>.from(response.data['Search']);
@@ -34,5 +32,19 @@ class MovieService {
         .toList(growable: false);
 
     return movies;
+  }
+
+  Future<Movie> getMovie(String id) async {
+    final apiKey = _environmentConfig.movieApiKey;
+
+    final uri = "https://omdbapi.com/?apikey=$apiKey&i=$id";
+
+    final response = await _dio.get(uri);
+
+    final result = Map<String, dynamic>.from(response.data);
+
+    Movie movie = Movie.fromJson(result);
+
+    return movie;
   }
 }
