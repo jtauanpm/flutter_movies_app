@@ -126,6 +126,7 @@ class MoviesPage extends ConsumerWidget {
       },
     );
   }
+  
 
   Widget _errorMoviesGrid(Object error) {
     return Container(
