@@ -20,9 +20,11 @@ class MoviesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TextEditingController textController = TextEditingController();
+    final TextEditingController yearController = TextEditingController();
 
     void handleSubmit() {
       ref.read(movieServiceProvider).setSearchString(textController.text);
+      ref.read(movieServiceProvider).setSearchYear(yearController.text);
       ref.refresh(moviesFutureProvider);
     }
 
@@ -42,11 +44,12 @@ class MoviesPage extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-              icon: const Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              onPressed: handleSubmit),
+            icon: const Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            onPressed: handleSubmit,
+          ),
         ],
       ),
       body: Column(
@@ -59,12 +62,30 @@ class MoviesPage extends ConsumerWidget {
                   child: TextField(
                     controller: textController,
                     decoration: InputDecoration(
-                        labelText: 'Buscar por título',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 1, horizontal: 5)),
+                      labelText: 'Buscar por título',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 1, horizontal: 5),
+                    ),
+                    style: const TextStyle(fontSize: 14),
+                    minLines: 1,
+                    maxLines: 1,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: TextField(
+                    controller: yearController,
+                    decoration: InputDecoration(
+                      labelText: 'Buscar por ano',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 1, horizontal: 5),
+                    ),
                     style: const TextStyle(fontSize: 14),
                     minLines: 1,
                     maxLines: 1,
