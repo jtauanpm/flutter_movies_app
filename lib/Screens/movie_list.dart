@@ -126,7 +126,6 @@ class MoviesPage extends ConsumerWidget {
       },
     );
   }
-  
 
   Widget _errorMoviesGrid(Object error) {
     return Container(
@@ -137,30 +136,30 @@ class MoviesPage extends ConsumerWidget {
       width: 350,
       height: 200,
       padding: const EdgeInsets.all(16),
-      child: Column(
+      child: const Column(
         children: [
-          const Icon(
-            Icons.error_outline,
+          Icon(
+            Icons.error_outline_sharp,
             color: Colors.white,
             size: 48,
           ),
-          const SizedBox(height: 16),
-          const Text(
-            "Ocorreu um erro ao tentar buscar filmes. Tente novamente com outro título.",
+          SizedBox(height: 16),
+          Text(
+            "Nenhum registro encontrado para este filtro. Tente novamente com outro título e ano.",
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            "Detalhes do erro: $error",
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-            ),
-          ),
+          // SizedBox(height: 8)
+          // Text(
+          //   "Detalhes do erro: $error",
+          //   style: const TextStyle(
+          //     color: Colors.white,
+          //     fontSize: 14,
+          //   ),
+          // ),
         ],
       ),
     );
