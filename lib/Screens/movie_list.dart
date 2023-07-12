@@ -3,6 +3,7 @@ import 'package:flutter_movies_app/Services/movie_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../Widgets/movie_box.dart';
+import '../Widgets/movie_error.dart';
 import '../models/movie.dart';
 
 final moviesFutureProvider =
@@ -23,9 +24,9 @@ class MoviesPage extends ConsumerWidget {
     final TextEditingController yearController = TextEditingController();
 
     void handleSubmit() {
-      ref.read(movieServiceProvider).setSearchString(textController.text);
+      ref.read(movieServiceProvider).setSearchTitle(textController.text);
       ref.read(movieServiceProvider).setSearchYear(yearController.text);
-      ref.refresh(moviesFutureProvider);
+      var _ = ref.refresh(moviesFutureProvider);
     }
 
     return Scaffold(
@@ -112,7 +113,7 @@ class MoviesPage extends ConsumerWidget {
 
     return movies.when(
       error: (e, s) {
-        return _errorMoviesGrid(e);
+        return MovieError(error: e);
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       data: (movies) {
@@ -124,44 +125,6 @@ class MoviesPage extends ConsumerWidget {
           children: movies.map((movie) => MovieBox(movie: movie)).toList(),
         );
       },
-    );
-  }
-
-  Widget _errorMoviesGrid(Object error) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(227, 244, 67, 54),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      width: 350,
-      height: 200,
-      padding: const EdgeInsets.all(16),
-      child: const Column(
-        children: [
-          Icon(
-            Icons.error_outline_sharp,
-            color: Colors.white,
-            size: 48,
-          ),
-          SizedBox(height: 16),
-          Text(
-            "Nenhum registro encontrado para este filtro. Tente novamente com outro título e ano.",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          // SizedBox(height: 8)
-          // Text(
-          //   "Detalhes do erro: $error",
-          //   style: const TextStyle(
-          //     color: Colors.white,
-          //     fontSize: 14,
-          //   ),
-          // ),
-        ],
-      ),
     );
   }
 }

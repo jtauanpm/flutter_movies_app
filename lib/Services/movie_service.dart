@@ -12,11 +12,11 @@ class MovieService {
 
   final EnvironmentConfig _environmentConfig;
   final Dio _dio;
-  var searchString = "Avatar";
+  var searchTitle = "Avatar";
   var searchYear = "";
 
-  void setSearchString(String input) {
-    searchString = input;
+  void setSearchTitle(String input) {
+    searchTitle = input;
   }
 
   void setSearchYear(String input) {
@@ -27,7 +27,7 @@ class MovieService {
     final apiKey = _environmentConfig.movieApiKey;
 
     final uri =
-        "https://omdbapi.com/?apikey=$apiKey&s=$searchString&y=$searchYear&Type=movie";
+        "https://omdbapi.com/?apikey=$apiKey&s=$searchTitle&y=$searchYear&Type=movie";
 
     final response = await _dio.get(uri);
 
